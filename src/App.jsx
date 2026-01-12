@@ -1,5 +1,8 @@
-import PageLayout from "./components/layout/Layout.jsx";
-import WeddingHome from "./pages/WeddingHome.jsx";
+import { Suspense, lazy } from "react";
+
+const PageLayout = lazy(() => import("./components/layout/Layout.jsx"));
+const WeddingHome = lazy(() => import("./pages/WeddingHome.jsx"));
+
 
 function App() {
   const weddingData = {
@@ -9,9 +12,11 @@ function App() {
   };
 
   return (
-    <PageLayout>
-      <WeddingHome data={weddingData} />
-    </PageLayout>
+    <Suspense fallback={<div className="text-center text-gray-400 py-20">Loading...</div>}>
+      <PageLayout>
+        <WeddingHome data={weddingData} />
+      </PageLayout>
+    </Suspense>
   );
 }
 

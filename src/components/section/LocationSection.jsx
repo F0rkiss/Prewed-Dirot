@@ -9,8 +9,8 @@ const LocationSection = ({ weddingDate }) => {
   const year = date.getFullYear();
 
   return (
-    <section className="flex flex-col items-center justify-center pt-8 relative bg-white/20 rounded-2xl mx-4 md:mx-0">
-      <div className="item-center text-center z-10 max-w-md mx-auto pb-10">
+    <section className="flex flex-col items-center justify-center pt-8 max-w-md relative bg-white/20 rounded-2xl mx-auto">
+      <div className="flex flex-col items-center text-center z-10 max-w-md mx-auto pb-10">
           <h1 className="text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif">Pawiwahan</h1>
           <div className="flex mb-2 gap-2 text-gray-300 tracking-widest px-6 py-4 rounded-lg items-center">
               <h1 className="text-7xl ">{day}</h1>
