@@ -1,4 +1,4 @@
-import Video from '../../assets/video/sample.mp4';
+// import Video from '../../assets/video/sample.mp4';
 
 const VideoSection = () => {
   return (
@@ -9,9 +9,9 @@ const VideoSection = () => {
         </div>
         <div className="mb-2 text-sm text-gray-300 tracking-widest">
         <video width="640" height="360" controls>
-            <source src={Video} type="video/mp4" />
+            {/* <source src={Video} type="video/mp4" />
                 Your browser does not support the video tag.
-            </video>
+            </video> */}
         </div>
       </div>
     </section>
