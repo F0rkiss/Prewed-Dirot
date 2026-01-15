@@ -18,7 +18,7 @@ const LocationSection = ({ weddingDate }) => {
           </div>
           <h3 className="text-1xl md:text-1xl font-light text-gray-300 mb-3 tracking-wider font-serif">09.00 - 12.00 WITA</h3>
           <h3 className="text-1xl md:text-1xl font-light text-gray-300 mb-3 tracking-wider font-serif">Wangaya Kaja, Denpasar</h3>
-          <button className="bg-white/40 p-2 rounded-lg text-center text-gray-800">
+          <button className="bg-white/40 hover:bg-white/60 p-2 rounded-lg text-center text-gray-800">
             <a href="https://maps.app.goo.gl/As2YW35oBeBGS2AZ7">Lokasi Acara</a>
           </button>
       </div>
@@ -33,7 +33,7 @@ const LocationSection = ({ weddingDate }) => {
           </div>
           <h3 className="text-1xl md:text-1xl font-light text-gray-300 mb-3 tracking-wider font-serif">09.00 - 12.00 WITA</h3>
           <h3 className="text-1xl md:text-1xl font-light text-gray-300 mb-3 tracking-wider font-serif">Wangaya Kaja, Denpasar</h3>
-          <button className="bg-white/40 p-2 rounded-lg">
+          <button className="bg-white/40 p-2 hover:bg-white/60 rounded-lg">
             <a href="https://maps.app.goo.gl/As2YW35oBeBGS2AZ7">Lokasi Acara</a>
           </button>
       </div>

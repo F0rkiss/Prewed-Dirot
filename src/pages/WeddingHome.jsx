@@ -8,6 +8,8 @@ import BackgroundSong from "../assets/Music/BackgroundMusic.mp3";
 import CountdownSection from "../components/section/CountdownSection.jsx";
 import LocationSection from "../components/section/LocationSection.jsx";
 import GallerySection from "../components/section/GallerySection.jsx";
+import VideoSection from "../components/section/VideoSection.jsx";
+import GiftsSection from "../components/section/GiftsSection.jsx";
 
 
 export default function WeddingHome({ data }) {
@@ -25,6 +27,8 @@ export default function WeddingHome({ data }) {
       <LocationSection weddingDate={data.weddingDate} />
       <CountdownSection weddingDate={data.weddingDate} />
       <GallerySection />
+      <VideoSection />
+      <GiftsSection />
     </>
   );
 }
