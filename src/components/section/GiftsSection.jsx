@@ -44,7 +44,7 @@ const GiftsSection = () => {
             
             <img src={giftIcon} alt="Gift Icon" className='max-w-20 md:max-w-40'/>
             <div>
-            <p className="flex  text-left">I Made Dirot Pradnyana</p>
+            <p className="flex  text-left">I Made Dirotsaha Pradnyana</p>
             <p className="flex  text-left"><strong>{NoRek}</strong></p>
             </div>
           </div>
