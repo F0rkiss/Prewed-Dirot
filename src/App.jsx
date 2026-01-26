@@ -8,7 +8,7 @@ function App() {
   const weddingData = {
     groomName: "Dirotsaha",
     brideName: "Anya",
-    weddingDate: "April 15, 2026"
+    weddingDate: "April 24, 2026"
   };
 
   return (

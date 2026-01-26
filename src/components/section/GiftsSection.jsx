@@ -5,9 +5,10 @@ import giftIcon from '../../assets/GiftsPic.png';
 const GiftsSection = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
+  const NoRek = "0402842332";
 
   const copy = async () => {
-    await navigator.clipboard.writeText("1123123321");
+    await navigator.clipboard.writeText(NoRek);
     setShowNotification(true);
     setFadeIn(false);
     
@@ -40,10 +41,11 @@ const GiftsSection = () => {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
         </div>
           <div className="flex justify-center items-center mb-2 gap-2 text-gray-300 tracking-widest px-6 py-4 rounded-lg items-center">
+            
             <img src={giftIcon} alt="Gift Icon" className='max-w-20 md:max-w-40'/>
             <div>
             <p className="flex  text-left">I Made Dirot Pradnyana</p>
-            <p className="flex  text-left"><strong>1123123321</strong></p>
+            <p className="flex  text-left"><strong>{NoRek}</strong></p>
             </div>
           </div>
           <button className='bg-white/40 p-2 rounded-lg hover:bg-white/60 transition-colors duration-300 text-gray-800' onClick={copy}>

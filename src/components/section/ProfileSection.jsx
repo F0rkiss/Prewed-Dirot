@@ -7,7 +7,7 @@ const ProfileSection = () => {
       <div className="flex flex-col items-center gap-8 z-10 max-w-md mx-auto pb-10">
         {/* ...existing code... */}
         <div className="text-3xl md:text-3xl font-light text-gray-300 tracking-wider font-serif">
-          <img className="max-w-60 rounded-[1vw] rotate-2" src={ProfileDirot} alt="Profile Dirot" />
+          <img className="max-w-60 rounded-[1vw] " src={ProfileDirot} alt="Profile Dirot" />
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>
@@ -24,7 +24,7 @@ const ProfileSection = () => {
           <div className="my-6 h-24 w-px bg-white/80"></div>
 
         <div className="text-3xl md:text-3xl font-light text-gray-300 tracking-wider font-serif">
-          <img className="max-w-60 rounded-[1vw] -rotate-2" src={ProfileAnya} alt="Profile Anya" />
+          <img className="max-w-60 rounded-[1vw] " src={ProfileAnya} alt="Profile Anya" />
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>
