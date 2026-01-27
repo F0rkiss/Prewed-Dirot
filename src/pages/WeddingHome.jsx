@@ -10,6 +10,7 @@ import LocationSection from "../components/section/LocationSection.jsx";
 import GallerySection from "../components/section/GallerySection.jsx";
 import VideoSection from "../components/section/VideoSection.jsx";
 import GiftsSection from "../components/section/GiftsSection.jsx";
+import FormSection from "../components/section/FormSection.jsx";
 
 
 export default function WeddingHome({ data }) {
@@ -29,6 +30,7 @@ export default function WeddingHome({ data }) {
       <GallerySection />
       <VideoSection />
       <GiftsSection />
+      <FormSection />
     </>
   );
 }
