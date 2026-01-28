@@ -41,6 +41,7 @@ const FormSection = () => {
         .insert([
           {
             name: formData.name,
+            massage: formData.massage,
             is_coming: formData.attendance === 'yes',
             family_amount: parseInt(formData.groupSize)
           }
@@ -56,6 +57,7 @@ const FormSection = () => {
       // Reset form
       setFormData({
         name: '',
+        message: '',
         attendance: '',
         groupSize: ''
       });
@@ -142,6 +144,22 @@ const FormSection = () => {
               min="1"
               className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
               placeholder="How many people?"
+              disabled={isSubmitting}
+            />
+          </div>
+
+          <div className="text-left">
+            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+              Message
+            </label>
+            <input
+              type="textarea"
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+              placeholder="Enter your message"
               disabled={isSubmitting}
             />
           </div>

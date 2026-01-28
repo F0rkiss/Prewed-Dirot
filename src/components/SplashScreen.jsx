@@ -3,7 +3,7 @@ import splashscreenImage from '../assets/splashscreen.jpg';
 import weddingPhoto from '../assets/wedding-photo.jpg';
 import { supabase } from '../lib/supabase.js';
 
-export default function SplashScreen({ onReady }) {
+export default function SplashScreen({ brideName, groomName, weddingDate, onReady }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [error, setError] = useState(null);
@@ -164,10 +164,10 @@ export default function SplashScreen({ onReady }) {
           <div className="relative z-10 text-center px-6">
             <div className="mb-12">
               <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg">
-                Dirotsaha <br/>&<br/>Anya
+                {groomName} <br/>&<br/>{brideName}
               </h1>
               <p className="text-white/90 text-base md:text-lg drop-shadow">
-                24 April 2026
+                {weddingDate}
               </p>
             </div>
 

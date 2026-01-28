@@ -14,7 +14,7 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
           <span className="block text-4xl md:text-5xl font-light text-gray-300 mb-3 tracking-wider">
             {groomName}
           </span>
-          <span className="block text-5xl md:text-6xl italic my-4 text-rose-400">
+          <span className="block text-5xl md:text-6xl italic my-4 text-gray-500">
             &
           </span>
           <span className="block text-4xl md:text-5xl font-light text-gray-300 mt-3 tracking-wider">
@@ -24,16 +24,16 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
         
         {/* Date */}
         <div className="mt-6">
-          <div className="w-20 h-[1px] bg-rose-300 mx-auto mb-2"></div>
+          <div className="w-20 h-[1px] bg-gray-500 mx-auto mb-2"></div>
           <p className="text-lg md:text-xl text-gray-300 tracking-widest font-light uppercase">
             {weddingDate}
           </p>
-          <div className="w-20 h-[1px] bg-rose-300 mx-auto mt-2"></div>
+          <div className="w-20 h-[1px] bg-gray-500 mx-auto mt-2"></div>
         </div>
         
         {/* Decorative bottom element */}
         <div className="mt-8">
-          <i className='bx bx-chevron-down text-rose-400 text-3xl animate-bounce'></i>
+          <i className='bx bx-chevron-down text-gray-500 text-3xl animate-bounce'></i>
         </div>
 
         <div className="mb-16">

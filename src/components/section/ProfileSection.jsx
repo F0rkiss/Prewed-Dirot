@@ -17,8 +17,8 @@ const ProfileSection = () => {
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>
-            <h3 className='text-3xl font-serif'>I Made Dirotsaha Pradnyana</h3>
-            <h1 className='text-1xl font-serif font-bold'>Dirot</h1>
+            <h3 className='text-3xl font-serif'>I Made Dirotsaha Pradnyana S.S.</h3>
+            {/* <h1 className='text-1xl font-serif font-bold'>Dirot</h1> */}
             <p>Putra kedua dari pasangan</p>
             <p className='font-serif'>Bapak I Gede Simbadi</p>
             <p>& </p>
@@ -34,8 +34,8 @@ const ProfileSection = () => {
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>
-            <h1 className='text-3xl font-serif'>I Gusti Ayu Pt Pradnya Dewi</h1>
-            <h3 className='text-1xl font-serif font-bold'>Anya</h3>
+            <h1 className='text-3xl font-serif'>I Gusti Ayu Pt Pradnya Dewi S.M</h1>
+            {/* <h3 className='text-1xl font-serif font-bold'>Anya</h3> */}
             <p>Putri pertama dari pasangan</p>
             <p className='font-serif capitalize'>Bapak I gusti ketut sujana putra</p>
             <p>& </p>

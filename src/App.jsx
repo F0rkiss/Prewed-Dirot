@@ -11,7 +11,7 @@ function App() {
 
   const weddingData = {
     groomName: "Dirotsaha",
-    brideName: "Anya",
+    brideName: "Pradnya",
     weddingDate: "April 24, 2026"
   };
 
@@ -23,7 +23,12 @@ function App() {
   if (!showContent) {
     return (
       <div className={`transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
-        <SplashScreen onReady={handleOpenInvitation} />
+        <SplashScreen 
+          onReady={handleOpenInvitation}
+          groomName={weddingData.groomName}
+          brideName={weddingData.brideName}
+          weddingDate={weddingData.weddingDate}
+        />
       </div>
     );
   }
