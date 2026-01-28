@@ -1,13 +1,19 @@
-import ProfileDirot from '../../assets/ProfileDirot.jpg';
-import ProfileAnya from '../../assets/ProfileAnya.jpg';
+import { supabase } from '../../lib/supabase.js';
 
 const ProfileSection = () => {
+  const { data: dirot } = supabase.storage
+      .from('Media')
+      .getPublicUrl('images/ProfileDirot.jpg');
+
+  const { data: anya } = supabase.storage
+      .from('Media')
+      .getPublicUrl('images/ProfileAnya.jpg');
   return (
     <section className="flex items-center justify-center pt-8 relative">
       <div className="flex flex-col items-center gap-8 z-10 max-w-md mx-auto pb-10">
         {/* ...existing code... */}
         <div className="text-3xl md:text-3xl font-light text-gray-300 tracking-wider font-serif">
-          <img className="max-w-60 rounded-[1vw] " src={ProfileDirot} alt="Profile Dirot" />
+          <img className="max-w-60 rounded-[1vw] " src={dirot.publicUrl} alt="Profile Dirot" />
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>
@@ -24,7 +30,7 @@ const ProfileSection = () => {
           <div className="my-6 h-24 w-px bg-white/80"></div>
 
         <div className="text-3xl md:text-3xl font-light text-gray-300 tracking-wider font-serif">
-          <img className="max-w-60 rounded-[1vw] " src={ProfileAnya} alt="Profile Anya" />
+          <img className="max-w-60 rounded-[1vw] " src={anya.publicUrl} alt="Profile Anya" />
         </div>
         <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
           <div className='text-center'>

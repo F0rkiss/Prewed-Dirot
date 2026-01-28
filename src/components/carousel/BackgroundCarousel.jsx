@@ -1,14 +1,40 @@
 import React, { useEffect, useState } from "react";
-
-import img1 from "../../assets/carousel/carousel4.jpg";
-import img2 from "../../assets/carousel/carousel3.jpg";
-import img3 from "../../assets/carousel/carousel2.jpg";
-import img4 from "../../assets/carousel/carousel1.jpg";
-
-const images = [img1, img2, img3, img4];
+import { supabase } from "../../lib/supabase.js";
 
 export default function BackgroundCarousel({ children, interval = 2500 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    async function fetchImages() {
+      const { data, error } = await supabase.storage
+        .from('Media')
+        .list('images/carousel', {
+          limit: 100,
+          offset: 0,
+          sortBy: { column: 'name', order: 'asc' }
+        });
+
+      if (error) {
+        console.error('Error fetching carousel images:', error);
+        return;
+      }
+
+      // Convert file list to full URLs
+      const imageUrls = data
+        .filter(file => file.id !== null)
+        .map(file => {
+          const { data: urlData } = supabase.storage
+            .from('Media')
+            .getPublicUrl(`images/carousel/${file.name}`);
+          return urlData.publicUrl;
+        });
+
+      setImages(imageUrls);
+    }
+
+    fetchImages();
+  }, []);
 
   useEffect(() => {
     if (!images.length) return;

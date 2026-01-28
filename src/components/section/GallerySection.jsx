@@ -1,16 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import gal1 from '../../assets/gallery/GAL1.jpg';
-import gal2 from '../../assets/gallery/GAL2.jpg';
-import gal3 from '../../assets/gallery/GAL3.jpg';
-import gal5 from '../../assets/gallery/GAL5.jpg';
-import gal4 from '../../assets/gallery/GAL4.jpg';
-import gal6 from '../../assets/gallery/GAL6.jpg';
-import gal7 from '../../assets/gallery/GAL7.jpg';
-import gal8 from '../../assets/gallery/GAL8.jpg';
-import gal9 from '../../assets/gallery/GAL9.jpg';
-import gal10 from '../../assets/gallery/GAL10.jpg';
-import gal11 from '../../assets/gallery/GAL11.jpg';
-import gal12 from '../../assets/gallery/GAL12.jpg';
+import { supabase } from '../../lib/supabase.js';
 
 const GallerySection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,10 +8,41 @@ const GallerySection = () => {
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
     const [viewHistory, setViewHistory] = useState([]);
+    const [allImages, setAllImages] = useState([]);
     const thumbnailRefs = useRef([]);
 
-    // All 12 images
-    const allImages = [gal1, gal2, gal3, gal4, gal5, gal6, gal7, gal8, gal9, gal10, gal11, gal12];
+    // console.log('GallerySection component mounted, allImages:', allImages);
+
+    useEffect(() => {
+        async function fetchImages() {
+            const { data, error } = await supabase.storage
+                .from('Media')
+                .list('images/gallery', {
+                    limit: 100,
+                    offset: 0,
+                    sortBy: { column: 'name', order: 'asc' }
+                });
+
+            if (error) {
+                console.error('Error fetching images:', error);
+                return;
+            }
+
+            // Convert file list to full URLs
+            const imageUrls = data
+                .filter(file => file.id !== null)
+                .map(file => {
+                    const { data: urlData } = supabase.storage
+                        .from('Media')
+                        .getPublicUrl(`images/gallery/${file.name}`);
+                    return urlData.publicUrl;
+                });
+
+            setAllImages(imageUrls);
+        }
+
+        fetchImages();
+    }, [])
     
     // Only first 9 images for initial display
     const displayedImages = allImages.slice(0, 9);
