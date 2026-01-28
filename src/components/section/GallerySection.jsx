@@ -20,7 +20,7 @@ const GallerySection = () => {
                 .list('images/gallery', {
                     limit: 100,
                     offset: 0,
-                    sortBy: { column: 'name', order: 'asc' }
+                    sortBy: { column: 'name', order: 'desc' }
                 });
 
             if (error) {
