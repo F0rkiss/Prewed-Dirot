@@ -143,43 +143,53 @@ export default function SplashScreen({ onReady }) {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-end justify-center px-2 py-40 relative">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${splashscreenImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-6">
-        <div className="mb-12">
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-4 drop-shadow-lg">
-            Dirotsaha <br/>&<br/>Anya
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl drop-shadow">
-            24 April 2026
-          </p>
+    <div className="h-screen overflow-hidden bg-white">
+      <div className="md:flex h-full">
+        {/* Left side - only shows on desktop */}
+        <div className="hidden md:block md:w-1/2 h-full overflow-hidden">
+          <img src={weddingPhoto} alt="Wedding Photo" className="w-full h-full object-cover" />
         </div>
 
-        {isLoading ? (
-          <div className="text-center">
-            <div className="mb-4">
-              <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
-            </div>
-            <p className="text-white text-sm drop-shadow">Please wait...</p>
-            <p className="text-white/70 text-xs mt-2 drop-shadow">{loadingProgress}%</p>
-            {error && <p className="text-red-300 text-xs mt-2">{error}</p>}
-          </div>
-        ) : (
-          <button
-            onClick={onReady}
-            className="px-10 py-4 bg-white text-gray-800 rounded-full font-semibold text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 hover:bg-gray-50"
+        {/* Right side - splash screen content */}
+        <div className="w-full md:w-1/2 h-full relative flex items-end justify-center px-2 py-40">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${splashscreenImage})` }}
           >
-            Open Invitation
-          </button>
-        )}
+            <div className="absolute inset-0 bg-black/40"></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 text-center px-6">
+            <div className="mb-12">
+              <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg">
+                Dirotsaha <br/>&<br/>Anya
+              </h1>
+              <p className="text-white/90 text-base md:text-lg drop-shadow">
+                24 April 2026
+              </p>
+            </div>
+
+            {isLoading ? (
+              <div className="text-center">
+                <div className="mb-4">
+                  <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
+                </div>
+                <p className="text-white text-sm drop-shadow">Please wait...</p>
+                <p className="text-white/70 text-xs mt-2 drop-shadow">{loadingProgress}%</p>
+                {error && <p className="text-red-300 text-xs mt-2">{error}</p>}
+              </div>
+            ) : (
+              <button
+                onClick={onReady}
+                className="px-10 py-4 bg-white text-gray-800 rounded-full font-semibold text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 hover:bg-gray-50"
+              >
+                Open Invitation
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
