@@ -101,7 +101,6 @@ prewed-dirot/
 │   ├── pages/          # Page components
 │   ├── App.jsx         # Main app component
 │   └── main.jsx        # Entry point
-├── firebase.js         # Firebase configuration
 ├── tailwind.config.js  # Tailwind configuration
 └── vite.config.js      # Vite configuration
 ```
