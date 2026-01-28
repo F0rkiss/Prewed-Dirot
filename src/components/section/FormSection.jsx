@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
+import { supabase } from '../../lib/supabase.js';
 
 const FormSection = () => {
   const [formData, setFormData] = useState({
@@ -36,13 +35,18 @@ const FormSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Add document to Firebase
-      await addDoc(collection(db, 'rsvp'), {
-        name: formData.name,
-        attendance: formData.attendance,
-        groupSize: parseInt(formData.groupSize),
-        timestamp: new Date()
-      });
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('rsvp')
+        .insert([
+          {
+            name: formData.name,
+            is_coming: formData.attendance === 'yes',
+            family_amount: parseInt(formData.groupSize)
+          }
+        ]);
+
+      if (error) throw error;
 
       // Success notification
       setNotificationMessage('✓ RSVP submitted successfully!');
@@ -58,7 +62,7 @@ const FormSection = () => {
 
       setTimeout(() => setShowNotification(false), 3000);
     } catch (error) {
-      console.error('Error adding document: ', error);
+      console.error('Error submitting RSVP: ', error);
       setNotificationMessage('❌ Error submitting RSVP. Please try again.');
       setNotificationType('error');
       setShowNotification(true);
