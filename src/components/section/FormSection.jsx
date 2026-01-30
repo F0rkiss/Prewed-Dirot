@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
+import { motion } from 'framer-motion';
 
 const FormSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     attendance: '',
-    groupSize: ''
+    groupSize: '',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -41,7 +44,7 @@ const FormSection = () => {
         .insert([
           {
             name: formData.name,
-            massage: formData.massage,
+            message: formData.message,
             is_coming: formData.attendance === 'yes',
             family_amount: parseInt(formData.groupSize)
           }
@@ -78,101 +81,122 @@ const FormSection = () => {
     <section className="flex items-center justify-center py-12 px-4 relative">
       {/* Toast Notification */}
       {showNotification && (
-        <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-500 ${
-          notificationType === 'success' ? 'bg-green-500' : 'bg-red-500'
-        } text-white`}>
+        <motion.div 
+          className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50 ${
+            notificationType === 'success' ? 'bg-green-500' : 'bg-red-500'
+          } text-white`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+        >
           {notificationMessage}
-        </div>
+        </motion.div>
       )}
 
       <div className="text-center z-10 max-w-md w-full mx-auto">
-        <h1 className='text-3xl md:text-4xl font-light text-gray-300 mb-4 tracking-wider font-serif'>
-          RSVP
-        </h1>
-        <p className="text-sm text-gray-300 mb-8 tracking-widest">
-          Please confirm your attendance
-        </p>
+        <AnimatedSection variant="fadeInDown" delay={0.1}>
+          <h1 className='text-3xl md:text-4xl font-light text-gray-300 mb-4 tracking-wider font-serif'>
+            RSVP
+          </h1>
+          <p className="text-sm text-gray-300 mb-8 tracking-widest">
+            Please confirm your attendance
+          </p>
+        </AnimatedSection>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Field */}
-          <div className="text-left">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-              Name *
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
-              placeholder="Enter your name"
-              disabled={isSubmitting}
-            />
-          </div>
+        <StaggerContainer staggerDelay={0.15}>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name Field */}
+            <StaggerItem variant="fadeInUp">
+              <div className="text-left">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                  placeholder="Enter your name"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </StaggerItem>
 
-          {/* Attendance Field */}
-          <div className="text-left">
-            <label htmlFor="attendance" className="block text-sm font-medium text-gray-300 mb-2">
-              Will you attend? *
-            </label>
-            <select
-              id="attendance"
-              name="attendance"
-              value={formData.attendance}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all appearance-none cursor-pointer"
-              disabled={isSubmitting}
-            >
-              <option value="" className="bg-gray-800">Select an option</option>
-              <option value="yes" className="bg-gray-800">Yes, I will attend</option>
-              <option value="no" className="bg-gray-800">No, I cannot attend</option>
-            </select>
-          </div>
+            {/* Attendance Field */}
+            <StaggerItem variant="fadeInUp">
+              <div className="text-left">
+                <label htmlFor="attendance" className="block text-sm font-medium text-gray-300 mb-2">
+                  Will you attend? *
+                </label>
+                <select
+                  id="attendance"
+                  name="attendance"
+                  value={formData.attendance}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all appearance-none cursor-pointer"
+                  disabled={isSubmitting}
+                >
+                  <option value="" className="bg-gray-800">Select an option</option>
+                  <option value="yes" className="bg-gray-800">Yes, I will attend</option>
+                  <option value="no" className="bg-gray-800">No, I cannot attend</option>
+                </select>
+              </div>
+            </StaggerItem>
 
-          {/* Group Size Field */}
-          <div className="text-left">
-            <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
-              Number of Guests *
-            </label>
-            <input
-              type="number"
-              id="groupSize"
-              name="groupSize"
-              value={formData.groupSize}
-              onChange={handleChange}
-              min="1"
-              className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
-              placeholder="How many people?"
-              disabled={isSubmitting}
-            />
-          </div>
+            {/* Group Size Field */}
+            <StaggerItem variant="fadeInUp">
+              <div className="text-left">
+                <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
+                  Number of Guests *
+                </label>
+                <input
+                  type="number"
+                  id="groupSize"
+                  name="groupSize"
+                  value={formData.groupSize}
+                  onChange={handleChange}
+                  min="1"
+                  className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                  placeholder="How many people?"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </StaggerItem>
 
-          <div className="text-left">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-              Message
-            </label>
-            <input
-              type="textarea"
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
-              placeholder="Enter your message"
-              disabled={isSubmitting}
-            />
-          </div>
+            <StaggerItem variant="fadeInUp">
+              <div className="text-left">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all resize-none"
+                  placeholder="Enter your message"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </StaggerItem>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-white/40 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-white/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
-          </button>
-        </form>
+            {/* Submit Button */}
+            <StaggerItem variant="fadeInUp">
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-white/40 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-white/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
+              </motion.button>
+            </StaggerItem>
+          </form>
+        </StaggerContainer>
       </div>
     </section>
   );

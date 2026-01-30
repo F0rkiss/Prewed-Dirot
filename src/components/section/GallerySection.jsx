@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../../lib/supabase.js';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const GallerySection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -148,45 +150,73 @@ const GallerySection = () => {
     return (
         <section className="flex items-center justify-center pt-8 pb-12 relative">
         <div className="text-center z-10 max-w-md mx-auto pb-10">
-            <div className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>
-                <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Moment</h1>
-            </div>
-            <p className='mb-2 text-sm text-gray-300 tracking-widest justify-center items-center '>I would cross a thousand lifetimes to find you, and I'll gladly spend another thousand loving you.</p>
-            <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <AnimatedSection variant="fadeInDown" delay={0.1}>
+                <div className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>
+                    <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Moment</h1>
+                </div>
+            </AnimatedSection>
+            <AnimatedSection variant="fadeIn" delay={0.2}>
+                <p className='mb-2 text-sm text-gray-300 tracking-widest justify-center items-center '>I would cross a thousand lifetimes to find you, and I'll gladly spend another thousand loving you.</p>
+            </AnimatedSection>
+            <StaggerContainer className="grid grid-cols-3 gap-4 max-w-4xl mx-auto" staggerDelay={0.1}>
                 {displayedImages.map((img, index) => (
-                <img 
-                    key={index}
-                    src={img} 
-                    alt={`Gallery ${index + 1}`} 
-                    className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity" 
-                    onClick={() => openImage(index)}
-                />
+                <StaggerItem key={index} variant="scaleUp">
+                    <motion.img 
+                        src={img} 
+                        alt={`Gallery ${index + 1}`} 
+                        className="w-full h-48 object-cover rounded-lg cursor-pointer" 
+                        onClick={() => openImage(index)}
+                        whileHover={{ scale: 1.05, opacity: 0.9 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                    />
+                </StaggerItem>
                 ))}
-            </div>
-            <div className="mt-6">
-                <button 
-                className="bg-white/40 p-2 rounded-lg hover:bg-white/60 transition-colors"
-                onClick={openSeeMore}
-                >
-                    See More
-                </button>
-            </div>
+            </StaggerContainer>
+            <AnimatedSection variant="fadeInUp" delay={0.3}>
+                <div className="mt-6">
+                    <motion.button 
+                        className="bg-white/40 p-2 rounded-lg hover:bg-white/60 transition-colors"
+                        onClick={openSeeMore}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        See More
+                    </motion.button>
+                </div>
+            </AnimatedSection>
             
-            <div className="mb-2 text-sm text-gray-300 tracking-widest justify-center items-center flex flex-col">
-                <div className="my-6 h-px w-24 bg-white/80"></div>
-                <p>This is the gallery section where photos will be displayed.</p>
-            </div>
+            <AnimatedSection variant="fadeIn" delay={0.4}>
+                <div className="mb-2 text-sm text-gray-300 tracking-widest justify-center items-center flex flex-col">
+                    <motion.div 
+                        className="my-6 h-px w-24 bg-white/80"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    ></motion.div>
+                    <p>This is the gallery section where photos will be displayed.</p>
+                </div>
+            </AnimatedSection>
         </div>
 
         {/* Modal */}
+        <AnimatePresence>
         {isModalOpen && (
-            <div 
-            className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-center p-4"
-            onClick={closeModal}
+            <motion.div 
+                className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-center p-4"
+                onClick={closeModal}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
             >
-            <div 
+            <motion.div 
                 className="flex flex-col items-center w-full max-w-6xl"
                 onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.2 }}
             >
                 {/* Top bar with counter and close button */}
                 <div className="flex items-center justify-between w-full mb-4">
@@ -203,27 +233,26 @@ const GallerySection = () => {
 
                 {/* Main content with navigation */}
                 <div className="flex items-center gap-4 w-full">
-                    {/* Previous button */}
-                    {/* <button className="text-white text-5xl hover:text-gray-300 bg-black/50 rounded-full w-12 h-12 flex items-center justify-center" onClick={prevImage} >
-                        ‹
-                    </button> */}
-
                     {/* Image display */}
                     <div 
                         className="flex flex-col items-center justify-center gap-4 flex-1"
                     >
-                        <img 
+                        <motion.img 
+                            key={currentImageIndex}
                             src={allImages[currentImageIndex]} 
                             alt={`Gallery ${currentImageIndex + 1}`}
                             className="max-w-full max-h-[70vh] object-contain rounded-lg select-none"
                             onTouchStart={onTouchStart}
                             onTouchMove={onTouchMove}
                             onTouchEnd={onTouchEnd}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2 }}
                         />
                         {/* Thumbnail slider */}
                         <div className="flex items-center gap-2 max-w-full overflow-x-auto px-4 pb-2 scroll-smooth">
                             {allImages.map((img, index) => (
-                            <img
+                            <motion.img
                                 key={index}
                                 ref={(el) => (thumbnailRefs.current[index] = el)}
                                 src={img}
@@ -237,19 +266,17 @@ const GallerySection = () => {
                                     setCurrentImageIndex(index);
                                     trackImageView(index, 'modal', 'thumbnail-click');
                                 }}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
                             />
                             ))}
                         </div>
                     </div>
-
-                    {/* Next button */}
-                    {/* <button className="text-white text-5xl hover:text-gray-300 bg-black/50 rounded-full w-12 h-12 flex items-center justify-center" onClick={nextImage} >
-                        ›
-                    </button> */}
                 </div>
-            </div>
-            </div>
+            </motion.div>
+            </motion.div>
         )}
+        </AnimatePresence>
 
         </section>
     );
