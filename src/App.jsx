@@ -25,8 +25,6 @@ function App() {
       <div className={`transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
         <SplashScreen 
           onReady={handleOpenInvitation}
-          groomName={weddingData.groomName}
-          brideName={weddingData.brideName}
           weddingDate={weddingData.weddingDate}
         />
       </div>
