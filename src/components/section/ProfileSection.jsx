@@ -30,9 +30,9 @@ const ProfileSection = () => {
             <div className='text-center'>
               <h3 className='text-3xl font-serif'>I Made Dirotsaha Pradnyana S.S.</h3>
               <p>Putra kedua dari pasangan</p>
-              <p className='font-serif'>Bapak I Gede Simbadi</p>
-              <p>& </p>
-              <p className='font-serif'>Ibu I Kade Mardaniati </p>
+              <p className='font-serif'>Drs. I Gede Simbadi</p>
+              <p>&</p>
+              <p className='font-serif'>Ibu I Kade Mardaniati, S.E.</p>
             </div>
           </div>
         </AnimatedSection>
@@ -65,9 +65,9 @@ const ProfileSection = () => {
             <div className='text-center'>
               <h1 className='text-3xl font-serif'>I Gusti Ayu Pt Pradnya Dewi S.M</h1>
               <p>Putri pertama dari pasangan</p>
-              <p className='font-serif capitalize'>Bapak I gusti ketut sujana putra</p>
-              <p>& </p>
-              <p className='font-serif capitalize'>Ibu gusti ayu made mastini </p>
+              <p className='font-serif capitalize'> I Gusti Ketut Sujana Putra</p>
+              <p>&</p>
+              <p className='font-serif capitalize'>Gusti Ayu Made Mastini </p>
             </div>
           </div>
         </AnimatedSection>

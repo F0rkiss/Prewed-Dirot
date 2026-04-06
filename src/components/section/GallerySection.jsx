@@ -16,35 +16,39 @@ const GallerySection = () => {
     // console.log('GallerySection component mounted, allImages:', allImages);
 
     useEffect(() => {
-        async function fetchImages() {
-            const { data, error } = await supabase.storage
-                .from('Media')
-                .list('images/gallery', {
-                    limit: 100,
-                    offset: 0,
-                    sortBy: { column: 'name', order: 'desc' }
-                });
+    async function fetchImages() {
+        const { data, error } = await supabase.storage
+            .from('Media')
+            .list('images/gallery', {
+                limit: 100,
+                offset: 0,
+                sortBy: { column: 'name', order: 'asc' }
+            });
 
-            if (error) {
-                console.error('Error fetching images:', error);
-                return;
-            }
-
-            // Convert file list to full URLs
-            const imageUrls = data
-                .filter(file => file.id !== null)
-                .map(file => {
-                    const { data: urlData } = supabase.storage
-                        .from('Media')
-                        .getPublicUrl(`images/gallery/${file.name}`);
-                    return urlData.publicUrl;
-                });
-
-            setAllImages(imageUrls);
+        if (error) {
+            console.error('Error fetching images:', error);
+            return;
         }
 
-        fetchImages();
-    }, [])
+        const imageUrls = data
+            .filter(file => file.id !== null)
+            .sort((a, b) => {
+                const numA = parseInt(a.name.match(/\d+/)?.[0] || 0);
+                const numB = parseInt(b.name.match(/\d+/)?.[0] || 0);
+                return numA - numB;
+            })
+            .map(file => {
+                const { data: urlData } = supabase.storage
+                    .from('Media')
+                    .getPublicUrl(`images/gallery/${file.name}`);
+                return urlData.publicUrl;
+            });
+
+        setAllImages(imageUrls);
+    }
+
+    fetchImages();
+}, []);
     
     // Only first 9 images for initial display
     const displayedImages = allImages.slice(0, 9);
@@ -67,8 +71,8 @@ const GallerySection = () => {
         };
         
         setViewHistory(prev => [...prev, trackingData]);
-        console.log('Image View Tracked:', trackingData);
-        console.log('Total views:', viewHistory.length + 1);
+        // console.log('Image View Tracked:', trackingData);
+        // console.log('Total views:', viewHistory.length + 1);
     };
 
     const openImage = (index) => {
@@ -147,6 +151,18 @@ const GallerySection = () => {
         }
     }, [currentImageIndex, isModalOpen]);
 
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isModalOpen]);
+
     return (
         <section className="flex items-center justify-center pt-8 pb-12 relative">
         <div className="text-center z-10 max-w-md mx-auto pb-10">
@@ -211,7 +227,7 @@ const GallerySection = () => {
                 exit={{ opacity: 0 }}
             >
             <motion.div 
-                className="flex flex-col items-center w-full max-w-6xl"
+                className="flex flex-col items-center justify-center w-full h-full max-w-6xl"
                 onClick={(e) => e.stopPropagation()}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -219,7 +235,7 @@ const GallerySection = () => {
                 transition={{ duration: 0.2 }}
             >
                 {/* Top bar with counter and close button */}
-                <div className="flex items-center justify-between w-full mb-4">
+                <div className="flex items-center justify-between w-full mb-4 absolute top-4 left-4 right-4 md:left-0 md:right-0">
                     <div className="text-white bg-black/50 px-4 py-2 rounded-full">
                         {currentImageIndex + 1} / {allImages.length}
                     </div>
@@ -231,46 +247,46 @@ const GallerySection = () => {
                     </button>
                 </div>
 
-                {/* Main content with navigation */}
-                <div className="flex items-center gap-4 w-full">
-                    {/* Image display */}
-                    <div 
-                        className="flex flex-col items-center justify-center gap-4 flex-1"
-                    >
-                        <motion.img 
-                            key={currentImageIndex}
-                            src={allImages[currentImageIndex]} 
-                            alt={`Gallery ${currentImageIndex + 1}`}
-                            className="max-w-full max-h-[70vh] object-contain rounded-lg select-none"
-                            onTouchStart={onTouchStart}
-                            onTouchMove={onTouchMove}
-                            onTouchEnd={onTouchEnd}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2 }}
+                {/* Main image display - centered */}
+                <div 
+                    className="flex items-center justify-center flex-1 w-full"
+                >
+                    <motion.img 
+                        key={currentImageIndex}
+                        src={allImages[currentImageIndex]} 
+                        alt={`Gallery ${currentImageIndex + 1}`}
+                        className="max-w-full max-h-[70vh] object-contain rounded-lg select-none"
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.2 }}
+                    />
+                </div>
+
+                {/* Fixed Thumbnail slider at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-sm w-full">
+                    <div className="flex items-center gap-2 overflow-x-auto px-4 py-4 scroll-smooth">
+                        {allImages.map((img, index) => (
+                        <motion.img
+                            key={index}
+                            ref={(el) => (thumbnailRefs.current[index] = el)}
+                            src={img}
+                            alt={`Thumbnail ${index + 1}`}
+                            className={`h-16 w-20 object-cover rounded cursor-pointer transition-all flex-shrink-0 ${
+                            currentImageIndex === index
+                                ? 'border-4 border-white/60 opacity-100 scale-120'
+                                : 'border-2 border-gray-500 opacity-60 hover:opacity-100'
+                            }`}
+                            onClick={() => {
+                                setCurrentImageIndex(index);
+                                trackImageView(index, 'modal', 'thumbnail-click');
+                            }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         />
-                        {/* Thumbnail slider */}
-                        <div className="flex items-center gap-2 max-w-full overflow-x-auto px-4 pb-2 scroll-smooth">
-                            {allImages.map((img, index) => (
-                            <motion.img
-                                key={index}
-                                ref={(el) => (thumbnailRefs.current[index] = el)}
-                                src={img}
-                                alt={`Thumbnail ${index + 1}`}
-                                className={`h-16 w-20 object-cover rounded cursor-pointer transition-all ${
-                                currentImageIndex === index
-                                    ? 'border-4 border-white/60 opacity-100 scale-120'
-                                    : 'border-2 border-gray-500 opacity-60 hover:opacity-100'
-                                }`}
-                                onClick={() => {
-                                    setCurrentImageIndex(index);
-                                    trackImageView(index, 'modal', 'thumbnail-click');
-                                }}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                            />
-                            ))}
-                        </div>
+                        ))}
                     </div>
                 </div>
             </motion.div>

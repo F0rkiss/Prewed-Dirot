@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase.js';
 
 import getGuestName from './GuestName';
 
-export default function SplashScreen({ weddingDate, onReady }) {
+export default function SplashScreen({ weddingDate, brideName = "Bride", groomName = "Groom", onReady }) {
   const guestName = getGuestName();
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -154,7 +154,7 @@ export default function SplashScreen({ weddingDate, onReady }) {
         </div>
 
         {/* Right side - splash screen content */}
-        <div className="w-full md:w-1/2 h-full relative flex items-end justify-center px-2 py-40">
+        <div className="w-full md:w-1/2 h-full relative flex flex-col items-center justify-between px-2 py-12 md:py-20">
           {/* Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
@@ -163,11 +163,21 @@ export default function SplashScreen({ weddingDate, onReady }) {
             <div className="absolute inset-0 bg-black/40"></div>
           </div>
 
-          {/* Content */}
-          <div className="relative z-10 text-center px-6">
+          {/* Top - Bride & Groom Names */}
+          <div className="relative z-10 text-left px-6 pt-8">
+            <h3 className='text-1xl md:text-2xl font-serif text-white drop-shadow-lg whitespace-pre-line leading-relaxed'>
+              The Wedding of
+            </h3>
+            <h2 className="text-3xl md:text-4xl font-serif text-white drop-shadow-lg whitespace-pre-line leading-relaxed">
+              {brideName} & {groomName}
+            </h2>
+          </div>
+
+          {/* Center - Loading or Button */}
+          <div className="relative z-10 text-center px-6 pt-40 md:pt-80">
             <div className="mb-12">
               <p className="text-white/80 text-sm md:text-base mb-2 drop-shadow">Dear</p>
-              <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg whitespace-pre-line leading-relaxed">
                 {guestName}
               </h1>
               <p className="text-white/90 text-base md:text-lg drop-shadow">
@@ -193,6 +203,9 @@ export default function SplashScreen({ weddingDate, onReady }) {
               </button>
             )}
           </div>
+
+          {/* Bottom - Empty space for balance */}
+          <div className="relative z-10 pb-8"></div>
         </div>
       </div>
     </div>

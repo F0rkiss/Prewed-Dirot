@@ -9,7 +9,7 @@ function App() {
   const [showContent, setShowContent] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  const weddingData = {
+  const weddingData = { 
     groomName: "Dirotsaha",
     brideName: "Pradnya",
     weddingDate: "April 24, 2026"
@@ -26,6 +26,8 @@ function App() {
         <SplashScreen 
           onReady={handleOpenInvitation}
           weddingDate={weddingData.weddingDate}
+          brideName={weddingData.brideName}
+          groomName={weddingData.groomName}
         />
       </div>
     );

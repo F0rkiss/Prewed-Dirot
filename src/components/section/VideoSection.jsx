@@ -2,10 +2,7 @@ import { supabase } from '../../lib/supabase.js';
 import AnimatedSection from '../ui/AnimatedSection';
 
 const VideoSection = () => {
-  // Get the public URL for the video
-  const { data } = supabase.storage
-    .from('Media')
-    .getPublicUrl('videos/sample.mp4');
+
 
   return (
     <section className="flex items-center justify-center pt-8 pb-12 relative">
@@ -17,10 +14,16 @@ const VideoSection = () => {
         </AnimatedSection>
         <AnimatedSection variant="scaleUp" delay={0.2}>
           <div className="mb-2 text-sm text-gray-300 tracking-widest">
-            <video width="640" height="360" controls>
-              <source src={data.publicUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="mx-auto w-full max-w-md                                                                                                                                                                                                                                                                                                              overflow-hidden rounded">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/x2nMQRQn3Vk"
+                title="Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
           </div>
         </AnimatedSection>
       </div>
