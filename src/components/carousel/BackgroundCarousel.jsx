@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase.js";
 
-export default function BackgroundCarousel({ children, interval = 2500 }) {
+export default function BackgroundCarousel({ children, interval = 4000 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [images, setImages] = useState([]);
 
@@ -44,7 +44,7 @@ export default function BackgroundCarousel({ children, interval = 2500 }) {
     }, interval);
 
     return () => clearInterval(id);
-  }, [interval]);
+  }, [images.length, interval]);
 
   return (
     <div className="relative w-full h-full">

@@ -13,10 +13,10 @@ import GiftsSection from "../components/section/GiftsSection.jsx";
 import FormSection from "../components/section/FormSection.jsx";
 
 
-export default function WeddingHome({ data }) {
+export default function WeddingHome({ data, autoPlay = false }) {
   return (
     <>
-      <BackgroundMusic audioSrc={BackgroundSong} />
+      <BackgroundMusic audioSrc={BackgroundSong} autoPlay={autoPlay} />
       <HeroSection
         groomName={data.groomName}
         brideName={data.brideName}

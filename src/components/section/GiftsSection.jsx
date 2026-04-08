@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const GiftsSection = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
-  const NoRek = "1298739";
+  const NoRek = "4350417988";
 
   const copy = async () => {
     await navigator.clipboard.writeText(NoRek);

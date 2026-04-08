@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 const ProfileSection = () => {
   const { data: dirot } = supabase.storage
       .from('Media')
-      .getPublicUrl('images/ProfileDirot.jpg');
+      .getPublicUrl('images/ProfileDirot1.jpg');
 
   const { data: anya } = supabase.storage
       .from('Media')
-      .getPublicUrl('images/ProfileAnya.jpg');
+      .getPublicUrl('images/ProfileAnya1.jpg');
   return (
     <section className="flex items-center justify-center pt-8 relative">
       <div className="flex flex-col items-center gap-8 z-10 max-w-md mx-auto pb-10">
@@ -32,7 +32,7 @@ const ProfileSection = () => {
               <p>Putra kedua dari pasangan</p>
               <p className='font-serif'>Drs. I Gede Simbadi</p>
               <p>&</p>
-              <p className='font-serif'>Ibu I Kade Mardaniati, S.E.</p>
+              <p className='font-serif'>Ni Kade Mardaniati, S.E.</p>
             </div>
           </div>
         </AnimatedSection>

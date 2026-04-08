@@ -18,6 +18,25 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
         const videosToPreload = [];
         let loadedCount = 0;
 
+        // Add profile images from Supabase
+        try {
+          const { data: dirotProfile } = supabase.storage
+            .from('Media')
+            .getPublicUrl('images/ProfileDirot1.jpg');
+          const { data: anyaProfile } = supabase.storage
+            .from('Media')
+            .getPublicUrl('images/ProfileAnya1.jpg');
+
+          if (dirotProfile?.publicUrl) {
+            imagesToPreload.push(dirotProfile.publicUrl);
+          }
+          if (anyaProfile?.publicUrl) {
+            imagesToPreload.push(anyaProfile.publicUrl);
+          }
+        } catch (err) {
+          console.warn('Could not fetch profile images:', err);
+        }
+
         // Fetch carousel images from Supabase
         try {
           const { data: carouselData, error: carouselError } = await supabase.storage

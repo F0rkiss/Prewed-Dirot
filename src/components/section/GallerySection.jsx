@@ -91,6 +91,20 @@ const GallerySection = () => {
         setIsModalOpen(false);
     };
 
+    const goToNext = () => {
+        if (!allImages.length) return;
+        const newIndex = (currentImageIndex + 1) % allImages.length;
+        setCurrentImageIndex(newIndex);
+        trackImageView(newIndex, 'modal', 'next-button');
+    };
+
+    const goToPrev = () => {
+        if (!allImages.length) return;
+        const newIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+        setCurrentImageIndex(newIndex);
+        trackImageView(newIndex, 'modal', 'prev-button');
+    };
+
     const onTouchStart = (e) => {
         setTouchEnd(null);
         setTouchStart(e.targetTouches[0].clientX);
@@ -220,7 +234,7 @@ const GallerySection = () => {
         <AnimatePresence>
         {isModalOpen && (
             <motion.div 
-                className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-center p-4"
+                className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-center "
                 onClick={closeModal}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -234,8 +248,30 @@ const GallerySection = () => {
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ duration: 0.2 }}
             >
+                {/* Overlay navigation buttons */}
+                <button
+                    className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        goToPrev();
+                    }}
+                    aria-label="Previous photo"
+                >
+                    ‹
+                </button>
+                <button
+                    className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        goToNext();
+                    }}
+                    aria-label="Next photo"
+                >
+                    ›
+                </button>
+
                 {/* Top bar with counter and close button */}
-                <div className="flex items-center justify-between w-full mb-4 absolute top-4 left-4 right-4 md:left-0 md:right-0">
+                <div className="flex items-center justify-between w-full mb-4 absolute top-4 right-2 md:left-0 md:right-0">
                     <div className="text-white bg-black/50 px-4 py-2 rounded-full">
                         {currentImageIndex + 1} / {allImages.length}
                     </div>

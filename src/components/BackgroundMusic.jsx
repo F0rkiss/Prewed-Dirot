@@ -1,8 +1,42 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const BackgroundMusic = ({ audioSrc }) => {
+const BackgroundMusic = ({ audioSrc, autoPlay = false }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!autoPlay || !audioRef.current) {
+      return;
+    }
+
+    const tryPlay = async () => {
+      try {
+        await audioRef.current.play();
+      } catch (error) {
+        console.warn('Autoplay was blocked by the browser:', error);
+      }
+    };
+
+    tryPlay();
+  }, [autoPlay]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+
+    return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+    };
+  }, []);
 
   const togglePlay = () => {
     if (audioRef.current) {
