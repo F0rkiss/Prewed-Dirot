@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className={`transition-opacity duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-      <Suspense fallback={<div className="text-center text-gray-400 py-20">Loading...</div>}>
+      <Suspense fallback={<div className="text-center text-gray-400 py-20">Memuat...</div>}>
         <PageLayout>
           <WeddingHome data={weddingData} autoPlay />
         </PageLayout>

@@ -30,19 +30,19 @@ const GiftsSection = () => {
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-500 ${
           fadeIn ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
         }`}>
-          ✓ Copied
+          ✓ Nomor rekening tersalin
         </div>
       )}
       
       <div className="text-center z-10 max-w-md mx-auto pb-10">
         <AnimatedSection variant="fadeInDown" delay={0.1}>
           <div className='text-2xl md:text-2xl font-light text-gray-300 mb-3 tracking-wider font-serif'>
-            <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Gifts</h1>
+            <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Wedding Gift</h1>
           </div>
         </AnimatedSection>
         <AnimatedSection variant="fadeIn" delay={0.2}>
           <div className="mb-2 text-sm text-gray-300 tracking-widest">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+            <p>Doa restu Anda adalah hadiah terindah. Apabila berkenan, tanda kasih dapat disampaikan melalui rekening berikut.</p>
           </div>
         </AnimatedSection>
         <AnimatedSection variant="fadeInLeft" delay={0.3}>
@@ -67,7 +67,7 @@ const GiftsSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Copy Account Number
+            Salin Nomor Rekening
           </motion.button>
         </AnimatedSection>
       </div>

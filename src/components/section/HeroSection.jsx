@@ -26,7 +26,7 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
             {groomName}
           </motion.span>
           <motion.span 
-            className="block text-5xl md:text-6xl italic my-4 text-gray-500"
+            className="block text-5xl md:text-6xl italic my-4 text-white"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -51,7 +51,7 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
           transition={{ duration: 0.8, delay: 1.0 }}
         >
           <motion.div 
-            className="w-20 h-[1px] bg-gray-500 mx-auto mb-2"
+            className="w-20 h-[1px] bg-white mx-auto mb-2"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
@@ -60,7 +60,7 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
             {weddingDate}
           </p>
           <motion.div 
-            className="w-20 h-[1px] bg-gray-500 mx-auto mt-2"
+            className="w-20 h-[1px] bg-white mx-auto mt-2"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
@@ -74,7 +74,7 @@ const HeroSection = ({ brideName, groomName, weddingDate }) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.4 }}
         >
-          <i className='bx bx-chevron-down text-gray-500 text-3xl animate-bounce'></i>
+          <i className='bx bx-chevron-down text-white text-3xl animate-bounce'></i>
         </motion.div>
 
         <div className="mb-16">

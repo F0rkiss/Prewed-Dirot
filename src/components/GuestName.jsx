@@ -8,10 +8,10 @@ function toTitleCase(text) {
 
 function getGuestName() {
   const params = new URLSearchParams(window.location.search);
-  const raw = (params.get("to") || "Guest").replace(/\+/g, " ").trim();
+  const raw = (params.get("to") || "").replace(/\+/g, " ").trim();
 
   if (!raw) {
-    return "Guest";
+    return "Bapak/Ibu/Saudara/i";
   }
 
   const normalized = raw

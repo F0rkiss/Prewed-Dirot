@@ -178,22 +178,22 @@ const GallerySection = () => {
     }, [isModalOpen]);
 
     return (
-        <section className="flex items-center justify-center pt-8 pb-12 relative">
+        <section className="flex items-center justify-center pt-8 pb-4 relative">
         <div className="text-center z-10 max-w-md mx-auto pb-10">
             <AnimatedSection variant="fadeInDown" delay={0.1}>
                 <div className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>
-                    <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Moment</h1>
+                    <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Wedding Gallery</h1>
                 </div>
             </AnimatedSection>
             <AnimatedSection variant="fadeIn" delay={0.2}>
-                <p className='mb-2 text-sm text-gray-300 tracking-widest justify-center items-center '>I would cross a thousand lifetimes to find you, and I'll gladly spend another thousand loving you.</p>
+                <p className='mb-2 text-sm text-gray-300 tracking-widest justify-center items-center '>Jejak kisah yang kami rajut, disaksikan dalam setiap senyum dan doa.</p>
             </AnimatedSection>
             <StaggerContainer className="grid grid-cols-3 gap-4 max-w-4xl mx-auto" staggerDelay={0.1}>
                 {displayedImages.map((img, index) => (
                 <StaggerItem key={index} variant="scaleUp">
                     <motion.img 
                         src={img} 
-                        alt={`Gallery ${index + 1}`} 
+                        alt={`Galeri ${index + 1}`} 
                         className="w-full h-48 object-cover rounded-lg cursor-pointer" 
                         onClick={() => openImage(index)}
                         whileHover={{ scale: 1.05, opacity: 0.9 }}
@@ -211,7 +211,7 @@ const GallerySection = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        See More
+                        Lihat Selengkapnya
                     </motion.button>
                 </div>
             </AnimatedSection>
@@ -225,7 +225,7 @@ const GallerySection = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     ></motion.div>
-                    <p>This is the gallery section where photos will be displayed.</p>
+                    <p>Koleksi momen yang kami syukuri bersama orang terkasih.</p>
                 </div>
             </AnimatedSection>
         </div>
@@ -255,7 +255,7 @@ const GallerySection = () => {
                         e.stopPropagation();
                         goToPrev();
                     }}
-                    aria-label="Previous photo"
+                    aria-label="Foto sebelumnya"
                 >
                     ‹
                 </button>
@@ -265,7 +265,7 @@ const GallerySection = () => {
                         e.stopPropagation();
                         goToNext();
                     }}
-                    aria-label="Next photo"
+                    aria-label="Foto berikutnya"
                 >
                     ›
                 </button>
@@ -290,7 +290,7 @@ const GallerySection = () => {
                     <motion.img 
                         key={currentImageIndex}
                         src={allImages[currentImageIndex]} 
-                        alt={`Gallery ${currentImageIndex + 1}`}
+                        alt={`Galeri ${currentImageIndex + 1}`}
                         className="max-w-full max-h-[70vh] object-contain rounded-lg select-none"
                         onTouchStart={onTouchStart}
                         onTouchMove={onTouchMove}
@@ -309,7 +309,7 @@ const GallerySection = () => {
                             key={index}
                             ref={(el) => (thumbnailRefs.current[index] = el)}
                             src={img}
-                            alt={`Thumbnail ${index + 1}`}
+                            alt={`Pratinjau ${index + 1}`}
                             className={`h-16 w-20 object-cover rounded cursor-pointer transition-all flex-shrink-0 ${
                             currentImageIndex === index
                                 ? 'border-4 border-white/60 opacity-100 scale-120'

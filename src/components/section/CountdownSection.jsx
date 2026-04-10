@@ -38,7 +38,7 @@ const CountdownSection = ({ weddingDate }) => {
       <div className="text-center z-10 max-w-md mx-auto pb-10">
         <AnimatedSection variant="fadeInDown" delay={0.1}>
           <div className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>
-            <h1>Countdown Date</h1>
+            <h1>Wedding Countdown</h1>
           </div>
         </AnimatedSection>
         <AnimatedSection variant="scaleUp" delay={0.2}>

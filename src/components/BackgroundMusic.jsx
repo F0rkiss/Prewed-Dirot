@@ -1,17 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react';
+import musicFile from '../assets/Music/BackgroundMusic.mp3';
 
-const BackgroundMusic = ({ audioSrc, autoPlay = false }) => {
+const START_TIME_SECONDS = 2 * 60 + 55;
+
+const seekToStartIfNeeded = (audio) => {
+  if (!audio) {
+    return;
+  }
+
+  const duration = audio.duration;
+  if (!Number.isFinite(duration) || duration <= 0) {
+    audio.currentTime = START_TIME_SECONDS;
+    return;
+  }
+
+  if (audio.currentTime < START_TIME_SECONDS) {
+    audio.currentTime = Math.min(START_TIME_SECONDS, duration);
+  }
+};
+
+const BackgroundMusic = ({ autoPlay = false }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (!autoPlay || !audioRef.current) {
+    const audio = audioRef.current;
+    if (!autoPlay || !audio) {
       return;
     }
 
     const tryPlay = async () => {
       try {
-        await audioRef.current.play();
+        seekToStartIfNeeded(audio);
+        await audio.play();
       } catch (error) {
         console.warn('Autoplay was blocked by the browser:', error);
       }
@@ -26,34 +47,54 @@ const BackgroundMusic = ({ audioSrc, autoPlay = false }) => {
       return;
     }
 
-    const handlePlay = () => setIsPlaying(true);
+    const handleLoadedMetadata = () => {
+      seekToStartIfNeeded(audio);
+    };
+
+    const handlePlay = () => {
+      seekToStartIfNeeded(audio);
+      setIsPlaying(true);
+    };
+
     const handlePause = () => setIsPlaying(false);
 
+    const handleEnded = () => {
+      seekToStartIfNeeded(audio);
+      audio.play().catch((error) => {
+        console.warn('Loop playback was blocked by the browser:', error);
+      });
+    };
+
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
     };
   }, []);
 
   const togglePlay = () => {
-    if (audioRef.current) {
+    const audio = audioRef.current;
+    if (audio) {
       if (isPlaying) {
-        audioRef.current.pause();
+        audio.pause();
       } else {
-        audioRef.current.play();
+        seekToStartIfNeeded(audio);
+        audio.play();
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   return (
     <div className="fixed bottom-5 right-5 z-[1000]">
-      <audio ref={audioRef} loop>
-        <source src={audioSrc} type="audio/mpeg" />
-        Your browser does not support the audio element.
+      <audio ref={audioRef}>
+        <source src={musicFile} type="audio/mpeg" />
+        Peramban Anda tidak mendukung pemutar audio.
       </audio>
       
       <button 
@@ -61,7 +102,7 @@ const BackgroundMusic = ({ audioSrc, autoPlay = false }) => {
           isPlaying ? 'motion-safe:animate-pulse' : 'motion-safe:animate-pulse'
         }`}
         onClick={togglePlay}
-        aria-label={isPlaying ? 'Pause music' : 'Play music'}
+        aria-label={isPlaying ? 'Jeda musik' : 'Putar musik'}
       >
         {isPlaying ? 
         <i className='bx bx-volume-full text-2xl'></i> : <i className='bx bx-volume-mute text-2xl'></i>}

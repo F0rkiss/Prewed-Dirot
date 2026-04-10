@@ -11,6 +11,13 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [error, setError] = useState(null);
 
+  const formattedWeddingDate = new Date(`${weddingDate}T00:00:00`).toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
   useEffect(() => {
     const preloadAssets = async () => {
       try {
@@ -155,7 +162,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
         setIsLoading(false);
       } catch (error) {
         console.error('Error preloading assets:', error);
-        setError('Failed to load some assets');
+        setError('Sebagian media belum termuat');
         // Still allow user to proceed
         setIsLoading(false);
       }
@@ -169,7 +176,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
       <div className="md:flex h-full">
         {/* Left side - only shows on desktop */}
         <div className="hidden md:block md:w-1/2 h-full overflow-hidden">
-          <img src={weddingPhoto} alt="Wedding Photo" className="w-full h-full object-cover" />
+          <img src={weddingPhoto} alt="Foto Pasangan" className="w-full h-full object-cover" />
         </div>
 
         {/* Right side - splash screen content */}
@@ -187,7 +194,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
             <h3 className='text-1xl md:text-2xl font-serif text-white drop-shadow-lg whitespace-pre-line leading-relaxed'>
               The Wedding of
             </h3>
-            <h2 className="text-3xl md:text-4xl font-serif text-white drop-shadow-lg whitespace-pre-line leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-great-vibes text-white drop-shadow-lg whitespace-pre-line leading-relaxed">
               {brideName} & {groomName}
             </h2>
           </div>
@@ -195,7 +202,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
           {/* Center - Loading or Button */}
           <div className="relative z-10 text-center px-6 pt-40 md:pt-80">
             <div className="mb-12">
-              <p className="text-white/80 text-sm md:text-base mb-2 drop-shadow">Dear</p>
+              <p className="text-white/80 text-sm md:text-base mb-2 drop-shadow">Kepada Yth.</p>
               <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg whitespace-pre-line leading-relaxed">
                 {guestName}
               </h1>
@@ -209,7 +216,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
                 <div className="mb-4">
                   <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
                 </div>
-                <p className="text-white text-sm drop-shadow">Please wait...</p>
+                <p className="text-white text-sm drop-shadow">Mohon tunggu sebentar</p>
                 <p className="text-white/70 text-xs mt-2 drop-shadow">{loadingProgress}%</p>
                 {error && <p className="text-red-300 text-xs mt-2">{error}</p>}
               </div>
@@ -218,7 +225,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
                 onClick={onReady}
                 className="px-10 py-4 bg-white text-gray-800 rounded-full font-semibold text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 hover:bg-gray-50"
               >
-                Open Invitation
+                Buka Undangan
               </button>
             )}
           </div>

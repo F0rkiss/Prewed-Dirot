@@ -28,7 +28,7 @@ const FormSection = () => {
     
     // Validation
     if (!formData.name || !formData.attendance || !formData.groupSize) {
-      setNotificationMessage('Please fill in all fields');
+      setNotificationMessage('Mohon lengkapi seluruh data yang diperlukan.');
       setNotificationType('error');
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000);
@@ -53,7 +53,7 @@ const FormSection = () => {
       if (error) throw error;
 
       // Success notification
-      setNotificationMessage('✓ RSVP submitted successfully!');
+      setNotificationMessage('✓ Konfirmasi kehadiran telah kami terima. Terima kasih.');
       setNotificationType('success');
       setShowNotification(true);
       
@@ -68,7 +68,7 @@ const FormSection = () => {
       setTimeout(() => setShowNotification(false), 3000);
     } catch (error) {
       console.error('Error submitting RSVP: ', error);
-      setNotificationMessage('❌ Error submitting RSVP. Please try again.');
+      setNotificationMessage('❌ Mohon maaf, konfirmasi belum terkirim. Silakan coba kembali.');
       setNotificationType('error');
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000);
@@ -96,10 +96,10 @@ const FormSection = () => {
       <div className="text-center z-10 max-w-md w-full mx-auto">
         <AnimatedSection variant="fadeInDown" delay={0.1}>
           <h1 className='text-3xl md:text-4xl font-light text-gray-300 mb-4 tracking-wider font-serif'>
-            RSVP
+            Konfirmasi Kehadiran
           </h1>
           <p className="text-sm text-gray-300 mb-8 tracking-widest">
-            Please confirm your attendance
+            Mohon berkenan mengonfirmasi kehadiran Anda
           </p>
         </AnimatedSection>
 
@@ -109,7 +109,7 @@ const FormSection = () => {
             <StaggerItem variant="fadeInUp">
               <div className="text-left">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                  Name *
+                  Nama *
                 </label>
                 <input
                   type="text"
@@ -118,7 +118,7 @@ const FormSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
-                  placeholder="Enter your name"
+                  placeholder="Tuliskan nama Anda"
                   disabled={isSubmitting}
                 />
               </div>
@@ -128,7 +128,7 @@ const FormSection = () => {
             <StaggerItem variant="fadeInUp">
               <div className="text-left">
                 <label htmlFor="attendance" className="block text-sm font-medium text-gray-300 mb-2">
-                  Will you attend? *
+                  Konfirmasi Kehadiran *
                 </label>
                 <select
                   id="attendance"
@@ -138,9 +138,9 @@ const FormSection = () => {
                   className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all appearance-none cursor-pointer"
                   disabled={isSubmitting}
                 >
-                  <option value="" className="bg-gray-800">Select an option</option>
-                  <option value="yes" className="bg-gray-800">Yes, I will attend</option>
-                  <option value="no" className="bg-gray-800">No, I cannot attend</option>
+                  <option value="" className="bg-gray-800">Pilih jawaban</option>
+                  <option value="yes" className="bg-gray-800">Insyaallah hadir</option>
+                  <option value="no" className="bg-gray-800">Mohon maaf, belum dapat hadir</option>
                 </select>
               </div>
             </StaggerItem>
@@ -149,7 +149,7 @@ const FormSection = () => {
             <StaggerItem variant="fadeInUp">
               <div className="text-left">
                 <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
-                  Number of Guests *
+                  Jumlah Tamu *
                 </label>
                 <input
                   type="number"
@@ -159,7 +159,7 @@ const FormSection = () => {
                   onChange={handleChange}
                   min="1"
                   className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
-                  placeholder="How many people?"
+                  placeholder="Jumlah yang akan hadir"
                   disabled={isSubmitting}
                 />
               </div>
@@ -168,7 +168,7 @@ const FormSection = () => {
             <StaggerItem variant="fadeInUp">
               <div className="text-left">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
+                  Ucapan & Doa
                 </label>
                 <textarea
                   id="message"
@@ -177,7 +177,7 @@ const FormSection = () => {
                   onChange={handleChange}
                   rows="4"
                   className="w-full px-4 py-3 bg-white/10 border border-gray-300/30 rounded-lg text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all resize-none"
-                  placeholder="Enter your message"
+                  placeholder="Tulis doa dan ucapan terbaik"
                   disabled={isSubmitting}
                 />
               </div>
@@ -192,7 +192,7 @@ const FormSection = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
+                {isSubmitting ? 'Mengirim...' : 'Kirim Konfirmasi'}
               </motion.button>
             </StaggerItem>
           </form>
