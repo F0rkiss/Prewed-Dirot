@@ -1,10 +1,8 @@
 
 import HeroSection from "../components/section/HeroSection.jsx";
-import BackgroundMusic from "../components/BackgroundMusic.jsx";
 import PraySection from "../components/section/PraySection.jsx";
 import PrefaceSection from "../components/section/PrefaceSection.jsx";
 import ProfileSection from "../components/section/ProfileSection.jsx";
-import BackgroundSong from "../assets/Music/BackgroundMusic.mp3";
 import CountdownSection from "../components/section/CountdownSection.jsx";
 import LocationSection from "../components/section/LocationSection.jsx";
 import GallerySection from "../components/section/GallerySection.jsx";
@@ -13,10 +11,9 @@ import GiftsSection from "../components/section/GiftsSection.jsx";
 import FormSection from "../components/section/FormSection.jsx";
 
 
-export default function WeddingHome({ data, autoPlay = false }) {
+export default function WeddingHome({ data }) {
   return (
     <>
-      <BackgroundMusic audioSrc={BackgroundSong} autoPlay={autoPlay} />
       <HeroSection
         groomName={data.groomName}
         brideName={data.brideName}

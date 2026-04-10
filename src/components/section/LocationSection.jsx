@@ -34,7 +34,7 @@ const LocationSection = ({ weddingDate }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <a href="https://maps.app.goo.gl/wraSqQgKFyrMxjKy9" target="_blank" rel="noopener noreferrer">
+              <a href="https://maps.app.goo.gl/UHH6SBBncSiNRKip8" target="_blank" rel="noopener noreferrer">
                 Lokasi Acara
               </a>
             </motion.button>
@@ -69,7 +69,7 @@ const LocationSection = ({ weddingDate }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <a href="https://maps.app.goo.gl/wraSqQgKFyrMxjKy9" target="_blank" rel="noopener noreferrer">
+              <a href="https://maps.app.goo.gl/UHH6SBBncSiNRKip8" target="_blank" rel="noopener noreferrer">
                 Lokasi Acara
               </a>
             </motion.button>

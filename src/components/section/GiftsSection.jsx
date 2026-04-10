@@ -42,7 +42,7 @@ const GiftsSection = () => {
         </AnimatedSection>
         <AnimatedSection variant="fadeIn" delay={0.2}>
           <div className="mb-2 text-sm text-gray-300 tracking-widest">
-            <p>Tanpa mengurangi rasa hormat, bagi anda yan ingin memberikan tanda kasih untuk kami, dapat melalui :</p>
+            <p>Tanpa mengurangi rasa hormat, bagi anda yang ingin memberikan tanda kasih untuk kami, dapat melalui :</p>
           </div>
         </AnimatedSection>
         <AnimatedSection variant="fadeInLeft" delay={0.3}>

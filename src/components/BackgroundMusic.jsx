@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import musicFile from '../assets/Music/BackgroundMusic.mp3';
 
 const START_TIME_SECONDS = 2 * 60 + 55;
@@ -19,10 +19,25 @@ const seekToStartIfNeeded = (audio) => {
   }
 };
 
-const BackgroundMusic = ({ autoPlay = false }) => {
+const BackgroundMusic = forwardRef(({ autoPlay = false, showButton = true }, ref) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+
+  const playAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    seekToStartIfNeeded(audio);
+    audio.play().catch((error) => {
+      console.warn('Playback was blocked by the browser:', error);
+    });
+  };
+
+  useImperativeHandle(ref, () => ({
+    play: playAudio,
+  }));
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -32,8 +47,7 @@ const BackgroundMusic = ({ autoPlay = false }) => {
 
     const tryPlay = async () => {
       try {
-        seekToStartIfNeeded(audio);
-        await audio.play();
+        playAudio();
       } catch (error) {
         console.warn('Autoplay was blocked by the browser:', error);
       }
@@ -52,7 +66,6 @@ const BackgroundMusic = ({ autoPlay = false }) => {
 
     const handleLoadedMetadata = () => {
       seekToStartIfNeeded(audio);
-      audio.muted = isMuted;
     };
 
     const handleCanPlay = () => {
@@ -88,19 +101,15 @@ const BackgroundMusic = ({ autoPlay = false }) => {
     };
   }, []);
 
-  const toggleMute = () => {
+  const togglePlay = () => {
     const audio = audioRef.current;
     if (audio) {
-      const nextMuted = !audio.muted;
-      audio.muted = nextMuted;
-      setIsMuted(nextMuted);
-
-      if (audio.paused) {
-        seekToStartIfNeeded(audio);
-        audio.play().catch((error) => {
-          console.warn('Playback was blocked by the browser:', error);
-        });
+      if (isPlaying) {
+        audio.pause();
+        return;
       }
+
+      playAudio();
     }
   };
 
@@ -111,18 +120,20 @@ const BackgroundMusic = ({ autoPlay = false }) => {
         Peramban Anda tidak mendukung pemutar audio.
       </audio>
       
-      <button 
-        className={`w-[50px] h-[50px] opacity-25 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 shadow-lg bg-white/80 hover:bg-white hover:scale-110 text-black-600 ${
-          isPlaying ? 'motion-safe:animate-pulse' : 'motion-safe:animate-pulse'
-        }`}
-        onClick={toggleMute}
-        aria-label={isMuted ? 'Aktifkan suara' : 'Matikan suara'}
-      >
-        {isMuted ? 
-        <i className='bx bx-volume-mute text-2xl'></i> : <i className='bx bx-volume-full text-2xl'></i>}
-      </button>
+      {showButton ? (
+        <button 
+          className={`w-[50px] h-[50px] opacity-25 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 shadow-lg bg-white/80 hover:bg-white hover:scale-110 text-black-600 ${
+            isPlaying ? 'motion-safe:animate-pulse' : 'motion-safe:animate-pulse'
+          }`}
+          onClick={togglePlay}
+          aria-label={isPlaying ? 'Jeda musik' : 'Putar musik'}
+        >
+          {isPlaying ? 
+          <i className='bx bx-volume-full text-2xl'></i> : <i className='bx bx-volume-mute text-2xl'></i>}
+        </button>
+      ) : null}
     </div>
   );
-};
+});
 
 export default BackgroundMusic;
