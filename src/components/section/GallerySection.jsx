@@ -185,9 +185,9 @@ const GallerySection = () => {
                     <h1 className='text-3xl md:text-3xl font-light text-gray-300 mb-3 tracking-wider font-serif'>Wedding Gallery</h1>
                 </div>
             </AnimatedSection>
-            <AnimatedSection variant="fadeIn" delay={0.2}>
+            {/* <AnimatedSection variant="fadeIn" delay={0.2}>
                 <p className='mb-2 text-sm text-gray-300 tracking-widest justify-center items-center '>Jejak kisah yang kami rajut, disaksikan dalam setiap senyum dan doa.</p>
-            </AnimatedSection>
+            </AnimatedSection> */}
             <StaggerContainer className="grid grid-cols-3 gap-4 max-w-4xl mx-auto" staggerDelay={0.1}>
                 {displayedImages.map((img, index) => (
                 <StaggerItem key={index} variant="scaleUp">
@@ -225,7 +225,7 @@ const GallerySection = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     ></motion.div>
-                    <p>Koleksi momen yang kami syukuri bersama orang terkasih.</p>
+                    
                 </div>
             </AnimatedSection>
         </div>

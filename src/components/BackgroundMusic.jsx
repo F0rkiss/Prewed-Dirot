@@ -22,6 +22,7 @@ const seekToStartIfNeeded = (audio) => {
 const BackgroundMusic = ({ autoPlay = false }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -47,7 +48,14 @@ const BackgroundMusic = ({ autoPlay = false }) => {
       return;
     }
 
+    seekToStartIfNeeded(audio);
+
     const handleLoadedMetadata = () => {
+      seekToStartIfNeeded(audio);
+      audio.muted = isMuted;
+    };
+
+    const handleCanPlay = () => {
       seekToStartIfNeeded(audio);
     };
 
@@ -69,30 +77,36 @@ const BackgroundMusic = ({ autoPlay = false }) => {
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('canplay', handleCanPlay);
     };
   }, []);
 
-  const togglePlay = () => {
+  const toggleMute = () => {
     const audio = audioRef.current;
     if (audio) {
-      if (isPlaying) {
-        audio.pause();
-      } else {
+      const nextMuted = !audio.muted;
+      audio.muted = nextMuted;
+      setIsMuted(nextMuted);
+
+      if (audio.paused) {
         seekToStartIfNeeded(audio);
-        audio.play();
+        audio.play().catch((error) => {
+          console.warn('Playback was blocked by the browser:', error);
+        });
       }
     }
   };
 
   return (
     <div className="fixed bottom-5 right-5 z-[1000]">
-      <audio ref={audioRef}>
+      <audio ref={audioRef} preload="metadata">
         <source src={musicFile} type="audio/mpeg" />
         Peramban Anda tidak mendukung pemutar audio.
       </audio>
@@ -101,11 +115,11 @@ const BackgroundMusic = ({ autoPlay = false }) => {
         className={`w-[50px] h-[50px] opacity-25 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 shadow-lg bg-white/80 hover:bg-white hover:scale-110 text-black-600 ${
           isPlaying ? 'motion-safe:animate-pulse' : 'motion-safe:animate-pulse'
         }`}
-        onClick={togglePlay}
-        aria-label={isPlaying ? 'Jeda musik' : 'Putar musik'}
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Aktifkan suara' : 'Matikan suara'}
       >
-        {isPlaying ? 
-        <i className='bx bx-volume-full text-2xl'></i> : <i className='bx bx-volume-mute text-2xl'></i>}
+        {isMuted ? 
+        <i className='bx bx-volume-mute text-2xl'></i> : <i className='bx bx-volume-full text-2xl'></i>}
       </button>
     </div>
   );

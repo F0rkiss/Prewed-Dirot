@@ -195,7 +195,7 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
               The Wedding of
             </h3>
             <h2 className="text-4xl md:text-5xl font-great-vibes text-white drop-shadow-lg whitespace-pre-line leading-relaxed">
-              {brideName} & {groomName}
+              {groomName} & {brideName}
             </h2>
           </div>
 
@@ -203,7 +203,8 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
           <div className="relative z-10 text-center px-6 pt-40 md:pt-80">
             <div className="mb-12">
               <p className="text-white/80 text-sm md:text-base mb-2 drop-shadow">Kepada Yth.</p>
-              <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 drop-shadow-lg whitespace-pre-line leading-relaxed">
+              <p className="text-white/80 text-sm md:text-base mb-2 drop-shadow">Bapak/Ibu/Saudara/i</p>
+              <h1 className="text-4xl md:text-5xl font-great-vibes text-white mb-4 drop-shadow-lg whitespace-pre-line leading-relaxed">
                 {guestName}
               </h1>
               <p className="text-white/90 text-base md:text-lg drop-shadow">
@@ -223,9 +224,25 @@ export default function SplashScreen({ weddingDate, brideName = "Bride", groomNa
             ) : (
               <button
                 onClick={onReady}
-                className="px-10 py-4 bg-white text-gray-800 rounded-full font-semibold text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 hover:bg-gray-50"
+                className="inline-flex items-center gap-3 border-y border-white/70 px-10 py-3 text-white uppercase tracking-[0.25em] text-xs md:text-sm font-serif transition-colors duration-300 hover:border-white"
               >
-                Buka Undangan
+                <span className="flex items-center gap-3">
+                  {/* <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4 shrink-0 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path
+                      // strokeLinecap="round"
+                      // strokeLinejoin="round"
+                      d="M3 6.75h18m-18 0v10.5c0 .414.336.75.75.75h16.5a.75.75 0 0 0 .75-.75V6.75m-18 0 9 6 9-6"
+                    />
+                  </svg> */}
+                  <span>Buka Undangan</span>
+                </span>
               </button>
             )}
           </div>

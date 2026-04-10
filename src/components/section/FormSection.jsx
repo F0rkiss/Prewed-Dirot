@@ -99,7 +99,7 @@ const FormSection = () => {
             Konfirmasi Kehadiran
           </h1>
           <p className="text-sm text-gray-300 mb-8 tracking-widest">
-            Mohon berkenan mengonfirmasi kehadiran Anda
+            Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir dan memberikan do'a restu kepada kedua mempelai
           </p>
         </AnimatedSection>
 

@@ -23,7 +23,7 @@ function getGuestName() {
   const guests = normalized.split(" & ").map(toTitleCase).filter(Boolean);
 
   if (guests.length >= 2) {
-    return `${guests[0]}\n&\n${guests.slice(1).join(" & ")}`;
+    return `${guests[0]} & ${guests.slice(1).join(" & ")}`;
   }
 
   return toTitleCase(normalized);

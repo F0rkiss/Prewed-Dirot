@@ -24,7 +24,7 @@ const GiftsSection = () => {
   };
 
   return (
-    <section className="flex items-center justify-center pt-8 pb-12 relative">
+    <section className="flex items-center justify-center pt-8 pb-2 relative">
       {/* Toast Notification */}
       {showNotification && (
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-500 ${
@@ -42,7 +42,7 @@ const GiftsSection = () => {
         </AnimatedSection>
         <AnimatedSection variant="fadeIn" delay={0.2}>
           <div className="mb-2 text-sm text-gray-300 tracking-widest">
-            <p>Doa restu Anda adalah hadiah terindah. Apabila berkenan, tanda kasih dapat disampaikan melalui rekening berikut.</p>
+            <p>Tanpa mengurangi rasa hormat, bagi anda yan ingin memberikan tanda kasih untuk kami, dapat melalui :</p>
           </div>
         </AnimatedSection>
         <AnimatedSection variant="fadeInLeft" delay={0.3}>
