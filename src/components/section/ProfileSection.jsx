@@ -28,10 +28,10 @@ const ProfileSection = () => {
         <AnimatedSection variant="fadeInUp" delay={0.2}>
           <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
             <div className='text-center'>
-              <h3 className='text-3xl font-great-vibes'>I Made Dirotsaha Pradnyana, S.S.</h3>
-              <p>Putra kedua dari pasangan</p>
+              <h3 className='text-[22px] font-serif pb-2'>I Made Dirotsaha Pradnyana, S.S.</h3>
+              <p className='font-serif capitalize'>Putra kedua dari pasangan</p>
               <p className='font-serif'>Drs. I Gede Simbadi</p>
-              <p>&</p>
+              <p className='font-serif capitalize'>&</p>
               <p className='font-serif'>Ni Kade Mardaniati, S.E.</p>
             </div>
           </div>
@@ -63,10 +63,10 @@ const ProfileSection = () => {
         <AnimatedSection variant="fadeInUp" delay={0.5}>
           <div className='text-gray-300 mb-3 text-base items-center tracking-wider'>
             <div className='text-center'>
-              <h1 className='text-3xl font-great-vibes'>I Gusti Ayu Pt Pradnya Dewi, S.M.</h1>
-              <p>Putri pertama dari pasangan</p>
+              <h1 className='text-[22px] font-serif pb-2'>I Gusti Ayu Pt Pradnya Dewi, S.M.</h1>
+              <p className='font-serif capitalize'>Putri pertama dari pasangan</p>
               <p className='font-serif capitalize'> I Gusti Ketut Sujana Putra</p>
-              <p>&</p>
+              <p className='font-serif capitalize'>&</p>
               <p className='font-serif capitalize'>Gusti Ayu Made Mastini </p>
             </div>
           </div>

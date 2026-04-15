@@ -139,7 +139,7 @@ const FormSection = () => {
                   disabled={isSubmitting}
                 >
                   <option value="" className="bg-gray-800">Pilih jawaban</option>
-                  <option value="yes" className="bg-gray-800">Insyaallah hadir</option>
+                  <option value="yes" className="bg-gray-800">Hadir</option>
                   <option value="no" className="bg-gray-800">Mohon maaf, belum dapat hadir</option>
                 </select>
               </div>
